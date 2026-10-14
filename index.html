@@ -3,441 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enquête - Gare de Ravel-les-Bois</title>
-    
-    <!-- Polices Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Special+Elite&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-
+    <title>Enquête - Un Esprit Brillant Éteint</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            background-color: #0c0a09;
-            color: #d6d3d1;
-            font-family: 'Open Sans', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 10px;
-            background-image: 
-                radial-gradient(circle at center, rgba(12, 10, 9, 0.75) 0%, rgba(12, 10, 9, 0.95) 100%),
-                url('https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&q=80&w=1920');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            font-family: 'Courier Prime', monospace;
+            background-color: #0b0b0d;
+            color: #d1d5db;
         }
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
+        .font-typewriter {
+            font-family: 'Special Elite', cursive, monospace;
         }
 
-        .investigation-card {
-            background-color: rgba(28, 25, 23, 0.92);
-            border: 2px solid #78350f;
-            border-radius: 8px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
-            padding: 35px;
-            backdrop-filter: blur(8px);
-        }
-
-        .header {
-            text-align: center;
-            border-bottom: 2px dashed #78350f;
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-        }
-
-        .badge {
-            display: inline-block;
-            background-color: #991b1b;
-            color: #fef2f2;
+        .font-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            font-weight: 700;
+        }
+
+        /* Effet de flottaison doux du dossier */
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+
+        .floating-container {
+            animation: subtleFloat 6s ease-in-out infinite;
+        }
+
+        /* Arrière-plan noir / obscurité */
+        .crime-bg {
+            background: linear-gradient(to bottom, rgba(11, 11, 13, 0.85), rgba(11, 11, 13, 0.95)),
+                        url('image_836516.jpg') center/cover no-repeat fixed;
+        }
+
+        /* Ruban jaune Scène de Crime */
+        .crime-tape {
+            background: #eab308;
+            color: #000;
+            font-weight: 900;
             letter-spacing: 2px;
+            transform: rotate(-1.5deg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            text-transform: uppercase;
+        }
+
+        /* Style du document d'enquête */
+        .dossier-paper {
+            background-color: #16161a;
+            border: 1px solid #374151;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(185, 28, 28, 0.2);
+            position: relative;
+        }
+
+        .dossier-paper::before {
+            content: "SECRET - DANGER";
+            position: absolute;
+            top: 25px;
+            right: -20px;
+            transform: rotate(20deg);
+            color: rgba(220, 38, 38, 0.2);
+            font-size: 1.6rem;
+            font-weight: bold;
+            border: 2px dashed rgba(220, 38, 38, 0.2);
             padding: 4px 12px;
-            border-radius: 4px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        .title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            color: #f59e0b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-
-        .subtitle {
+            pointer-events: none;
             font-family: 'Special Elite', cursive;
-            font-size: 1.1rem;
-            color: #a8a29e;
         }
 
-        .story-box {
-            background-color: rgba(12, 10, 9, 0.6);
-            border-left: 4px solid #f59e0b;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 0 6px 6px 0;
-            text-align: center;
+        /* Inputs personnalisés */
+        .detective-input {
+            background: rgba(10, 10, 15, 0.85);
+            border: 1px solid #4b5563;
+            color: #f3f4f6;
+            transition: all 0.3s ease;
         }
 
-        .story-lead {
-            font-family: 'Cinzel', serif;
-            font-size: 1.25rem;
-            color: #f5f5f4;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
-        }
-
-        .story-text {
-            font-size: 0.98rem;
-            line-height: 1.6;
-            color: #d6d3d1;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .story-highlight {
-            font-family: 'Special Elite', cursive;
-            color: #ef4444;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-
-        .form-section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: #f59e0b;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #44403c;
-            padding-bottom: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #d6d3d1;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(12, 10, 9, 0.8);
-            border: 1px solid #78350f;
-            border-radius: 4px;
-            color: #f5f5f4;
-            font-size: 1rem;
-            font-family: 'Open Sans', sans-serif;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        select:focus {
+        .detective-input:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
             outline: none;
-            border-color: #f59e0b;
-            box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
-        }
-
-        .info-note {
-            background-color: rgba(120, 53, 15, 0.25);
-            border: 1px dashed #f59e0b;
-            padding: 12px 15px;
-            border-radius: 4px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            color: #fef3c7;
-            line-height: 1.4;
-        }
-
-        .email-note {
-            font-size: 0.82rem;
-            color: #a8a29e;
-            margin-top: 6px;
-            display: block;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-top: 25px;
-            margin-bottom: 25px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            margin-top: 3px;
-            accent-color: #f59e0b;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .checkbox-label {
-            font-size: 0.85rem;
-            color: #a8a29e;
-            line-height: 1.4;
-            cursor: pointer;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #b45309 0%, #78350f 100%);
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.1s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .confirmation-message {
-            display: none;
-            text-align: center;
-            padding: 30px 10px;
-        }
-
-        .confirmation-message h2 {
-            font-family: 'Cinzel', serif;
-            color: #22c55e;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .confirmation-message p {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #e7e5e4;
-            margin-bottom: 15px;
-        }
-
-        .stamp {
-            display: inline-block;
-            border: 3px solid #22c55e;
-            color: #22c55e;
-            font-family: 'Special Elite', cursive;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            transform: rotate(-5deg);
-            margin-top: 15px;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            .investigation-card {
-                padding: 20px;
-            }
-            .title {
-                font-size: 1.6rem;
-            }
         }
     </style>
 </head>
-<body>
+<body class="crime-bg min-h-screen py-10 px-4 flex flex-col justify-center items-center relative overflow-x-hidden">
 
-    <div class="container">
-        <div class="investigation-card">
+    <!-- Ruban d'avertissement haut de page -->
+    <div class="crime-tape w-full text-center py-2 text-xs md:text-sm fixed top-0 left-0 z-50 pointer-events-none border-b-2 border-black">
+        ⚠️ ZONE RESTRAINTE — INTERDICTION D'ENTRER SANS AUTORISATION — SCÈNE DE CRIME ⚠️
+    </div>
+
+    <!-- Conteneur principal flottant -->
+    <div class="floating-container max-w-3xl w-full mt-10 mb-10">
+        
+        <!-- En-tête / Badge d'Affiche -->
+        <div class="bg-red-950/80 border-t-4 border-red-600 rounded-t-lg p-6 text-center border-x border-red-900/50 backdrop-blur-md">
+            <span class="inline-block bg-red-600 text-black font-bold text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-3 font-typewriter">
+                SCELLÉ D'ENQUÊTE
+            </span>
+            <h1 class="text-2xl md:text-4xl font-bold font-title text-red-500 tracking-wider uppercase mb-1">
+                UN ESPRIT BRILLANT ÉTEINT.
+            </h1>
+            <h2 class="text-lg md:text-xl font-bold text-gray-200 tracking-widest uppercase mb-4">
+                UN MEURTRIER PARMI L'ÉLITE.
+            </h2>
+            <div class="inline-flex items-center justify-center space-x-2 bg-black/70 px-5 py-2.5 rounded-md border border-red-800">
+                <span class="text-red-500 font-bold text-xl animate-pulse">⏱️ 25 MINUTES</span>
+                <span class="text-gray-300 text-sm font-typewriter uppercase">POUR TOUT CHANGER.</span>
+            </div>
+        </div>
+
+        <!-- Corps du formulaire -->
+        <div class="dossier-paper rounded-b-lg p-6 md:p-10 text-gray-300 border-t-0">
             
-            <div class="header">
-                <span class="badge">Dossier Classé Confidentiel</span>
-                <h1 class="title">Gare de Ravel-les-Bois</h1>
-                <p class="subtitle">Ordre de Mission — Brigade de Détectives</p>
-            </div>
-
-           <!-- HISTOIRE / INTRO MISTIQUE -->
-            <div class="story-box">
-                <p class="story-lead">
-                    Une gare abandonnée. Un meurtre non résolu. 30 minutes pour tout changer.
+            <!-- Accroche / Histoire Officielle -->
+            <div id="introBox" class="mb-8 p-5 bg-black/60 border-l-4 border-red-600 rounded text-sm space-y-3 leading-relaxed">
+                <p class="text-gray-200 font-typewriter text-base md:text-lg text-justify">
+                    Le <strong class="text-red-400">26 octobre 2026 à 21h03</strong>, un mathématicien s'est éteint selon les lois d'une physique bien trop parfaite. Le coupable est parmi vous et compte sur votre silence pour s'en sortir.
                 </p>
-                <p class="story-text">
-                    Le 14 septembre à 21h05, le temps s'est brutalement arrêté sous les verrières de Ravel-les-Bois. Depuis ce soir-là, les ombres du passé murmurent encore, gardant jalousement la vérité sur ce qui s'est réellement déroulé sur le quai...
-                </p>
-                <p class="story-highlight">
-                    🕵️‍♂️ Votre équipe aura-t-elle l'étoffe de percer le mystère à temps ?
+                <p class="text-red-500 font-bold font-typewriter text-base pt-2 text-center">
+                    🕵️‍♂️ Allez-vous le laisser filer, ou votre équipe saura-t-elle briser l'omerta à temps ?
                 </p>
             </div>
-            <form id="escapeForm" action="https://formspree.io/f/mbglaqqe" method="POST">
-                <h2 class="form-section-title">Enregistrement de l'Équipe</h2>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nom">Nom du Premier Détective</label>
-                        <input type="text" id="nom" name="Nom_Détective_Principal" placeholder="Nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="prenom">Prénom</label>
-                        <input type="text" id="prenom" name="Prénom_Détective_Principal" placeholder="Prénom" required>
-                    </div>
-                </div>
+            <!-- Formulaire relié à Formspree via AJAX (sans redirection) -->
+            <form id="escapeForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                
+                <!-- Section 1 : Groupe -->
+                <div class="border-b border-gray-700 pb-6">
+                    <h3 class="text-lg font-bold text-white mb-2 font-typewriter flex items-center">
+                        <span class="text-red-500 mr-2">👥</span> IDENTIFICATION DE L'ÉQUIPE
+                    </h3>
+                    <p class="text-xs text-gray-400 mb-4">
+                        Chaque membre peut soumettre un nom de groupe. L'organisation sélectionnera et attribuera le nom officiel final qui convient au groupe.
+                    </p>
 
-                <div class="form-group">
-                    <label for="email">Adresse Email de Contact</label>
-                    <input type="email" id="email" name="_replyto" placeholder="détective@exemple.fr" required>
-                    <span class="email-note">📧 Un e-mail contenant tous les détails logistiques et le lieu exact du rendez-vous vous sera envoyé à cette adresse.</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="nomGroupe">Proposition de Nom d'Équipe</label>
-                    <input type="text" id="nomGroupe" name="Proposition_Nom_Equipe" placeholder="Ex: Les Enquêteurs de l'Ombre" required>
-                    <div class="info-note">
-                        📌 <strong>Note importante :</strong> Ce nom est une proposition. Si d'autres participants s'inscrivent séparément ou si les groupes sont réorganisés, le nom définitif de votre brigade pourra varier ou être ajusté par le club.
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">
+                            Nom proposé pour votre groupe *
+                        </label>
+                        <input type="text" required id="groupName" name="Nom_du_Groupe_Propose" 
+                            placeholder="Ex: Les Enquêteurs du Nombre, Brigade 21..." 
+                            class="w-full p-3 rounded detective-input font-typewriter text-sm">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="nombreCoequipiers">Nombre de Coéquipiers Accompagnateurs</label>
-                    <select id="nombreCoequipiers" name="Nombre_Coéquipiers" onchange="gererChampsCoequipiers()" required>
-                        <option value="" disabled selected>Sélectionner le nombre...</option>
-                        <option value="0">Aucun (Je m'inscris seul)</option>
-                        <option value="1">1 Coéquipier</option>
-                        <option value="2">2 Coéquipiers</option>
-                        <option value="3">3 Coéquipiers (Maximum)</option>
-                    </select>
+                <!-- Section 2 : Membres (Maximum 4 personnes) -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-white font-typewriter flex items-center">
+                            <span class="text-red-500 mr-2">🔎</span> MEMBRES DE L'ÉQUIPE (MAX 4)
+                        </h3>
+                        <span id="memberCounter" class="text-xs bg-red-900/60 text-red-300 px-3 py-1 rounded border border-red-700 font-mono">
+                            1 / 4 Membre(s)
+                        </span>
+                    </div>
+
+                    <div id="membersContainer" class="space-y-4">
+                        <!-- Membre 1 (Obligatoire) -->
+                        <div class="member-card bg-black/50 p-4 rounded border border-gray-700 relative">
+                            <span class="absolute top-2 right-3 text-xs font-bold text-red-500 uppercase">Détective #1 (Chef d'équipe)</span>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-400 mb-1">Nom *</label>
+                                    <input type="text" required name="Membre1_Nom" class="w-full p-2 rounded detective-input text-sm" placeholder="Votre nom">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-400 mb-1">Prénom *</label>
+                                    <input type="text" required name="Membre1_Prenom" class="w-full p-2 rounded detective-input text-sm" placeholder="Votre prénom">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-400 mb-1">Adresse E-mail *</label>
+                                    <input type="email" required name="Membre1_Email" class="w-full p-2 rounded detective-input text-sm" placeholder="exemple@mail.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bouton d'ajout -->
+                    <div class="mt-4">
+                        <button type="button" id="addMemberBtn" onclick="addMember()" 
+                            class="bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs px-4 py-2.5 rounded border border-gray-600 font-typewriter transition flex items-center">
+                            <span class="text-red-500 text-base mr-2">+</span> Ajouter un membre (4 max)
+                        </button>
+                    </div>
                 </div>
 
-                <div id="zoneCoequipiers"></div>
+                <!-- Section 3 : Questions complémentaires -->
+                <div class="border-t border-gray-700 pt-6 space-y-4">
+                    <h3 class="text-lg font-bold text-white font-typewriter flex items-center">
+                        <span class="text-red-500 mr-2">⚙️</span> PRÉPARATION À L'ENQUÊTE
+                    </h3>
 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="consentement" name="Consentement_Règlement" value="Oui" required>
-                    <label for="consentement" class="checkbox-label">
-                        J'accepte d'entrer dans la salle d'enquête de la gare de Ravel-les-Bois, d'analyser les indices et de résoudre les énigmes avec mon équipe pour démasquer le tueur en moins de 30 minutes.
-                    </label>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">
+                            Votre niveau d'expérience en Escape Room / Enquêtes :
+                        </label>
+                        <select name="Niveau_Experience" class="w-full p-3 rounded detective-input text-sm font-typewriter">
+                            <option value="Novices">Novices — Notre première scène de crime</option>
+                            <option value="Intermédiaires">Intermédiaires — Quelques énigmes résolues</option>
+                            <option value="Experts">Experts — Prêts à briser l'omerta en moins de 25 min</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">
+                            Créneau d'intervention souhaité :
+                        </label>
+                        <select name="Creneau_Souhaite" class="w-full p-3 rounded detective-input text-sm font-typewriter">
+                            <option value="Matin">Session du matin</option>
+                            <option value="Apres-Midi">Session de l'après-midi</option>
+                            <option value="Soir">Session du soir</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">
+                            Remarques ou questions pour l'équipe d'organisation :
+                        </label>
+                        <textarea name="Remarques" rows="2" placeholder="Une observation particulière..." 
+                            class="w-full p-3 rounded detective-input text-sm font-typewriter"></textarea>
+                    </div>
                 </div>
 
-                <button type="submit" id="submitBtn" class="submit-btn">
-                    🔎 Valider l'Ordre de Mission
-                </button>
+                <!-- Bouton Valider -->
+                <div class="pt-4">
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-4 px-6 rounded-md shadow-lg font-typewriter tracking-widest text-base md:text-lg uppercase transition duration-300 border border-red-500 hover:shadow-red-900/50 flex justify-center items-center">
+                        <span id="btnText">🔒 VALIDER ET ENVOYER L'INSCRIPTION</span>
+                    </button>
+                </div>
             </form>
 
-            <div id="confirmationMessage" class="confirmation-message">
-                <h2>Mission Confirmée !</h2>
-                <p>
-                    L'inscription de la brigade <strong id="teamNameDisplay" style="color: #f59e0b;"></strong> a bien été enregistrée pour l'enquête de la <strong>Gare de Ravel-les-Bois</strong>.
+            <!-- Message de Suspense et Confirmation (Affiché après validation) -->
+            <div id="suspenseSuccessMessage" class="hidden py-8 px-6 bg-black/80 border-2 border-red-600 rounded-lg text-center space-y-6">
+                <div class="text-4xl animate-bounce">🕵️‍♂️</div>
+                
+                <h3 class="text-2xl md:text-3xl font-bold text-red-500 font-typewriter uppercase tracking-wider">
+                    SCELLÉS CONFIRMÉS... LE DOSSIER EST OUVERT.
+                </h3>
+                
+                <p class="text-base md:text-lg text-gray-200 font-typewriter leading-relaxed max-w-xl mx-auto">
+                    Merci pour votre inscription. Vos informations ont été transmises avec succès à notre cellule d'enquête.
                 </p>
-                <p>
-                    📬 <strong>Consultez votre boîte mail :</strong> Vous allez recevoir sous peu un e-mail récapitulatif contenant tous les détails, l'heure exacte et les consignes d'accès à la salle d'enquête.
-                </p>
-                <div class="stamp">Ordre Validé — 30 Min Top Chrono</div>
+
+                <div class="bg-red-950/40 p-5 rounded border border-red-800 text-sm text-gray-300 font-typewriter space-y-3 max-w-lg mx-auto text-left shadow-inner">
+                    <p class="flex items-start">
+                        <span class="text-red-500 font-bold mr-2">✉️</span> 
+                        <span>Un e-mail confidentiel vous sera bientôt envoyé... Gardez un œil sur votre boîte de réception.</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="text-red-500 font-bold mr-2">📂</span> 
+                        <span>Il contiendra l'intégralité de vos informations, le nom retenu pour votre équipe ainsi que l'heure exacte du déroulement de votre mission.</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="text-red-500 font-bold mr-2">⏱️</span> 
+                        <span>Soyez prêts. Dans l'ombre, les minutes sont déjà comptées...</span>
+                    </p>
+                </div>
+
+                <div class="text-xs text-gray-500 font-mono tracking-widest uppercase pt-2">
+                    — Fin de transmission confidentielle —
+                </div>
             </div>
 
         </div>
+
+        <!-- Pied de page -->
+        <div class="text-center text-xs text-gray-500 mt-4 font-typewriter">
+            Escape Room 2026 — Ne laissez pas le crime impuni.
+        </div>
     </div>
 
+    <!-- Script JavaScript -->
     <script>
-        function gererChampsCoequipiers() {
-            const nombre = parseInt(document.getElementById('nombreCoequipiers').value);
-            const zone = document.getElementById('zoneCoequipiers');
-            
-            zone.innerHTML = '';
+        let memberCount = 1;
+        const maxMembers = 4;
 
-            for (let i = 1; i <= nombre; i++) {
-                const divRow = document.createElement('div');
-                divRow.className = 'form-row';
-                divRow.style.marginTop = '15px';
-                
-                divRow.innerHTML = `
-                    <div class="form-group">
-                        <label for="nomCoequipier${i}">Nom du Coéquipier ${i}</label>
-                        <input type="text" id="nomCoequipier${i}" name="Nom_Coéquipier_${i}" placeholder="Nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="prenomCoequipier${i}">Prénom du Coéquipier ${i}</label>
-                        <input type="text" id="prenomCoequipier${i}" name="Prénom_Coéquipier_${i}" placeholder="Prénom" required>
-                    </div>
-                `;
-                
-                zone.appendChild(divRow);
+        function updateCounter() {
+            document.getElementById('memberCounter').innerText = `${memberCount} / ${maxMembers} Membre(s)`;
+            const addBtn = document.getElementById('addMemberBtn');
+            if (memberCount >= maxMembers) {
+                addBtn.disabled = true;
+                addBtn.classList.add('opacity-40', 'cursor-not-allowed');
+            } else {
+                addBtn.disabled = false;
+                addBtn.classList.remove('opacity-40', 'cursor-not-allowed');
             }
         }
 
-        const form = document.getElementById('escapeForm');
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        function addMember() {
+            if (memberCount < maxMembers) {
+                memberCount++;
+                const container = document.getElementById('membersContainer');
+                
+                const memberDiv = document.createElement('div');
+                memberDiv.className = 'member-card bg-black/50 p-4 rounded border border-gray-700 relative';
+                memberDiv.id = `member-${memberCount}`;
+                
+                memberDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold text-red-400 uppercase">Détective #${memberCount}</span>
+                        <button type="button" onclick="removeMember(${memberCount})" class="text-xs text-red-500 hover:text-red-300 underline font-typewriter">Supprimer</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Nom *</label>
+                            <input type="text" required name="Membre${memberCount}_Nom" class="w-full p-2 rounded detective-input text-sm" placeholder="Nom">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Prénom *</label>
+                            <input type="text" required name="Membre${memberCount}_Prenom" class="w-full p-2 rounded detective-input text-sm" placeholder="Prénom">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Adresse E-mail *</label>
+                            <input type="email" required name="Membre${memberCount}_Email" class="w-full p-2 rounded detective-input text-sm" placeholder="exemple@mail.com">
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(memberDiv);
+                updateCounter();
+            }
+        }
 
+        function removeMember(id) {
+            const elem = document.getElementById(`member-${id}`);
+            if (elem) {
+                elem.remove();
+                memberCount--;
+                updateCounter();
+            }
+        }
+
+        // Soumission asynchrone (AJAX) vers Formspree
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
             const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            
+            // Changement d'état du bouton pendant l'envoi
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Envoi du dossier...';
-
+            btnText.innerText = "⏳ TRANSMISSION DES DONNÉES...";
+            
             const formData = new FormData(form);
 
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
+            try {
+                const response = await fetch("https://formspree.io/f/mzedkbnq", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
                 if (response.ok) {
-                    const nomGroupe = document.getElementById('nomGroupe').value;
-                    form.style.display = 'none';
-                    document.getElementById('teamNameDisplay').textContent = nomGroupe;
-                    document.getElementById('confirmationMessage').style.display = 'block';
+                    // Masquer le formulaire et l'intro
+                    form.classList.add('hidden');
+                    document.getElementById('introBox').classList.add('hidden');
+                    
+                    // Afficher le message de suspense
+                    document.getElementById('suspenseSuccessMessage').classList.remove('hidden');
                 } else {
-                    alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
+                    alert("Une erreur s'est produite lors de la transmission. Veuillez réessayer.");
                     submitBtn.disabled = false;
-                    submitBtn.textContent = '🔎 Valider l\'Ordre de Mission';
+                    btnText.innerText = "🔒 VALIDER ET ENVOYER L'INSCRIPTION";
                 }
-            }).catch(error => {
-                alert("Erreur de connexion. Veuillez vérifier votre réseau.");
+            } catch (error) {
+                alert("Erreur de connexion. Vérifiez votre réseau puis réessayez.");
                 submitBtn.disabled = false;
-                submitBtn.textContent = '🔎 Valider l\'Ordre de Mission';
-            });
-        });
+                btnText.innerText = "🔒 VALIDER ET ENVOYER L'INSCRIPTION";
+            }
+        }
     </script>
 </body>
 </html>
